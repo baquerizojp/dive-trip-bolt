@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { Navigate } from 'react-router-dom';
+import { useMobile } from '@/hooks/useMobile';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -9,10 +9,11 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { isLoaded, isSignedIn } = useAuth();
+  const { isNative } = useMobile();
 
   if (!isLoaded) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center">
+      <div className={`min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center ${isNative ? 'safe-area-top safe-area-bottom' : ''}`}>
         <div className="text-center">
           <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
             <span className="text-white font-bold text-2xl">🤿</span>

@@ -1,12 +1,14 @@
-
 import React from 'react';
 import { SignIn, SignUp } from '@clerk/clerk-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useMobile } from '@/hooks/useMobile';
 
 const Auth = () => {
+  const { isNative } = useMobile();
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center p-4">
+    <div className={`min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center p-4 ${isNative ? 'safe-area-top safe-area-bottom' : ''}`}>
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
@@ -28,15 +30,23 @@ const Auth = () => {
                 <SignIn 
                   appearance={{
                     elements: {
-                      card: 'shadow-none',
+                      card: 'shadow-none border-none',
                       headerTitle: 'hidden',
                       headerSubtitle: 'hidden',
-                      socialButtonsBlockButton: 'w-full',
-                      formButtonPrimary: 'bg-blue-600 hover:bg-blue-700'
+                      socialButtonsBlockButton: 'w-full min-h-[44px]',
+                      formButtonPrimary: 'bg-blue-600 hover:bg-blue-700 min-h-[44px]',
+                      formFieldInput: 'min-h-[44px]',
+                      footerActionLink: 'text-blue-600'
+                    },
+                    layout: {
+                      socialButtonsPlacement: 'top',
+                      showOptionalFields: false
                     }
                   }}
-                  routing="path"
-                  path="/auth"
+                  routing="hash"
+                  signUpUrl="#/auth?tab=signup"
+                  afterSignInUrl="/"
+                  redirectUrl="/"
                 />
               </TabsContent>
               
@@ -44,15 +54,23 @@ const Auth = () => {
                 <SignUp 
                   appearance={{
                     elements: {
-                      card: 'shadow-none',
+                      card: 'shadow-none border-none',
                       headerTitle: 'hidden',
                       headerSubtitle: 'hidden',
-                      socialButtonsBlockButton: 'w-full',
-                      formButtonPrimary: 'bg-blue-600 hover:bg-blue-700'
+                      socialButtonsBlockButton: 'w-full min-h-[44px]',
+                      formButtonPrimary: 'bg-blue-600 hover:bg-blue-700 min-h-[44px]',
+                      formFieldInput: 'min-h-[44px]',
+                      footerActionLink: 'text-blue-600'
+                    },
+                    layout: {
+                      socialButtonsPlacement: 'top',
+                      showOptionalFields: false
                     }
                   }}
-                  routing="path"
-                  path="/auth"
+                  routing="hash"
+                  signInUrl="#/auth?tab=signin"
+                  afterSignUpUrl="/"
+                  redirectUrl="/"
                 />
               </TabsContent>
             </Tabs>

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Plus, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useClerk } from '@clerk/clerk-react';
 import { useAuth } from '@/hooks/useAuth';
+import { useMobile } from '@/hooks/useMobile';
 import TripCard from '@/components/TripCard';
 import CreateTripDialog from '@/components/CreateTripDialog';
 import { Trip } from '@/types/trip';
@@ -13,6 +13,7 @@ import { Trip } from '@/types/trip';
 const Index = () => {
   const { signOut } = useClerk();
   const { isAdmin, user } = useAuth();
+  const { isNative } = useMobile();
   
   const [trips, setTrips] = useState<Trip[]>([
     {
@@ -61,7 +62,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
+    <div className={`min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 ${isNative ? 'safe-area-top safe-area-bottom' : ''}`}>
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-4xl mx-auto px-4 py-4">
@@ -82,7 +83,7 @@ const Index = () => {
                 variant="ghost" 
                 size="sm" 
                 onClick={handleSignOut}
-                className="text-gray-600 hover:text-gray-900"
+                className="text-gray-600 hover:text-gray-900 min-h-[44px]"
               >
                 <LogOut className="w-4 h-4 mr-2" />
                 <span className="hidden sm:inline">Sign Out</span>
@@ -97,10 +98,10 @@ const Index = () => {
         <Tabs defaultValue="upcoming" className="w-full">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
             <TabsList className="bg-white w-full sm:w-auto">
-              <TabsTrigger value="upcoming" className="flex items-center gap-2 text-sm">
+              <TabsTrigger value="upcoming" className="flex items-center gap-2 text-sm min-h-[44px]">
                 Upcoming ({upcomingTrips.length})
               </TabsTrigger>
-              <TabsTrigger value="past" className="flex items-center gap-2 text-sm">
+              <TabsTrigger value="past" className="flex items-center gap-2 text-sm min-h-[44px]">
                 Past ({pastTrips.length})
               </TabsTrigger>
             </TabsList>
@@ -108,7 +109,7 @@ const Index = () => {
             {isAdmin && (
               <Button 
                 onClick={() => setIsCreateDialogOpen(true)}
-                className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto"
+                className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto min-h-[44px]"
                 size="sm"
               >
                 <Plus className="w-4 h-4 mr-2" />
@@ -138,7 +139,7 @@ const Index = () => {
                   {isAdmin && (
                     <Button 
                       onClick={() => setIsCreateDialogOpen(true)}
-                      className="bg-blue-600 hover:bg-blue-700"
+                      className="bg-blue-600 hover:bg-blue-700 min-h-[44px]"
                     >
                       <Plus className="w-4 h-4 mr-2" />
                       Create Trip

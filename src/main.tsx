@@ -1,4 +1,3 @@
-
 import { createRoot } from 'react-dom/client';
 import { ClerkProvider } from '@clerk/clerk-react';
 import App from './App.tsx';
@@ -11,7 +10,25 @@ if (!PUBLISHABLE_KEY) {
 }
 
 createRoot(document.getElementById("root")!).render(
-  <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+  <ClerkProvider 
+    publishableKey={PUBLISHABLE_KEY}
+    appearance={{
+      baseTheme: undefined,
+      variables: {
+        colorPrimary: '#2563eb',
+        colorText: '#1f2937',
+        colorTextSecondary: '#6b7280',
+        colorBackground: '#ffffff',
+        colorInputBackground: '#ffffff',
+        colorInputText: '#1f2937',
+        borderRadius: '0.5rem'
+      }
+    }}
+    afterSignInUrl="/"
+    afterSignUpUrl="/"
+    signInUrl="/auth"
+    signUpUrl="/auth"
+  >
     <App />
   </ClerkProvider>
 );
