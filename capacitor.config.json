@@ -3,7 +3,14 @@
   "appName": "Dive Trip Buddy",
   "webDir": "dist",
   "server": {
-    "androidScheme": "https"
+    "androidScheme": "https",
+    "allowNavigation": [
+      "*.clerk.accounts.dev",
+      "*.clerk.dev",
+      "accounts.google.com",
+      "*.google.com",
+      "*.googleapis.com"
+    ]
   },
   "plugins": {
     "StatusBar": {
@@ -16,7 +23,8 @@
       "resizeOnFullScreen": true
     },
     "App": {
-      "launchUrl": ""
+      "launchUrl": "",
+      "deepLinkingEnabled": true
     }
   }
 }

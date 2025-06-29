@@ -28,6 +28,9 @@ createRoot(document.getElementById("root")!).render(
     afterSignUpUrl="/"
     signInUrl="/auth"
     signUpUrl="/auth"
+    // Force redirect mode for OAuth on mobile
+    signInForceRedirectUrl="/"
+    signUpForceRedirectUrl="/"
   >
     <App />
   </ClerkProvider>
