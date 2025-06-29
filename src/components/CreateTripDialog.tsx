@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Trip } from '@/types/trip';
+import MobileOptimizedInput from './MobileOptimizedInput';
 
 interface CreateTripDialogProps {
   open: boolean;
@@ -65,7 +65,7 @@ const CreateTripDialog: React.FC<CreateTripDialogProps> = ({
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="title" className="text-sm">Trip Title *</Label>
-            <Input
+            <MobileOptimizedInput
               id="title"
               value={formData.title}
               onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
@@ -78,7 +78,7 @@ const CreateTripDialog: React.FC<CreateTripDialogProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="date" className="text-sm">Date *</Label>
-              <Input
+              <MobileOptimizedInput
                 id="date"
                 type="date"
                 value={formData.date}
@@ -90,7 +90,7 @@ const CreateTripDialog: React.FC<CreateTripDialogProps> = ({
             
             <div className="space-y-2">
               <Label htmlFor="location" className="text-sm">Location *</Label>
-              <Input
+              <MobileOptimizedInput
                 id="location"
                 value={formData.location}
                 onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
@@ -103,7 +103,7 @@ const CreateTripDialog: React.FC<CreateTripDialogProps> = ({
 
           <div className="space-y-2">
             <Label htmlFor="cost" className="text-sm">Cost per Person ($)</Label>
-            <Input
+            <MobileOptimizedInput
               id="cost"
               type="number"
               value={formData.cost}
@@ -116,7 +116,7 @@ const CreateTripDialog: React.FC<CreateTripDialogProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="minParticipants" className="text-sm">Min Participants</Label>
-              <Input
+              <MobileOptimizedInput
                 id="minParticipants"
                 type="number"
                 value={formData.minParticipants}
@@ -129,7 +129,7 @@ const CreateTripDialog: React.FC<CreateTripDialogProps> = ({
             
             <div className="space-y-2">
               <Label htmlFor="maxParticipants" className="text-sm">Max Participants</Label>
-              <Input
+              <MobileOptimizedInput
                 id="maxParticipants"
                 type="number"
                 value={formData.maxParticipants}

@@ -101,5 +101,62 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    /* Prevent zoom on iOS when focusing inputs */
+    -webkit-text-size-adjust: 100%;
+    /* Improve touch scrolling */
+    -webkit-overflow-scrolling: touch;
   }
+
+  /* Mobile-specific optimizations */
+  @media (max-width: 768px) {
+    /* Prevent horizontal scroll */
+    html, body {
+      overflow-x: hidden;
+    }
+    
+    /* Improve tap targets */
+    button, [role="button"], input, select, textarea {
+      min-height: 44px;
+    }
+    
+    /* Better touch feedback */
+    button:active, [role="button"]:active {
+      transform: scale(0.98);
+      transition: transform 0.1s ease;
+    }
+  }
+
+  /* Safe area handling for mobile devices */
+  @supports (padding: max(0px)) {
+    .safe-area-top {
+      padding-top: max(1rem, env(safe-area-inset-top));
+    }
+    
+    .safe-area-bottom {
+      padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* Capacitor specific styles */
+.capacitor-app {
+  /* Prevent text selection on mobile */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+  /* Prevent callouts on iOS */
+  -webkit-touch-callout: none;
+  
+  /* Prevent tap highlight */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Allow text selection for inputs and content areas */
+input, textarea, [contenteditable] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }

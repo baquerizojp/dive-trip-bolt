@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Dive Trip Buddy</string>
+    <string name="title_activity_main">Dive Trip Buddy</string>
+    <string name="package_name">com.divetripbuddy.app</string>
+    <string name="custom_url_scheme">com.divetripbuddy.app</string>
+</resources>

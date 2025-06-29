@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import MobileOptimizedInput from './MobileOptimizedInput';
 
 interface AddParticipantDialogProps {
   open: boolean;
@@ -18,8 +17,8 @@ const AddParticipantDialog: React.FC<AddParticipantDialogProps> = ({
 }) => {
   const [name, setName] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (e?: React.FormEvent) => {
+    e?.preventDefault();
     if (!name.trim()) return;
     
     onAddParticipant(name.trim());
@@ -36,13 +35,14 @@ const AddParticipantDialog: React.FC<AddParticipantDialogProps> = ({
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="participantName" className="text-sm">Name</Label>
-            <Input
+            <MobileOptimizedInput
               id="participantName"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter participant name"
               autoFocus
               className="text-sm"
+              onSubmit={handleSubmit}
             />
           </div>
 

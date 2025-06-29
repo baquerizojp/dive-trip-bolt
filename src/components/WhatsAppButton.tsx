@@ -1,7 +1,8 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Trip, Participant } from '@/types/trip';
+import { useMobile } from '@/hooks/useMobile';
+import MobileShare from './MobileShare';
 
 interface WhatsAppButtonProps {
   type: 'broadcast' | 'personal' | 'reminder' | 'bulk-interested' | 'bulk-unpaid';
@@ -22,6 +23,8 @@ const WhatsAppButton: React.FC<WhatsAppButtonProps> = ({
   size = 'default',
   className = ''
 }) => {
+  const { isNative } = useMobile();
+
   const formatDate = (dateString: string) => {
     // Fix date formatting to avoid timezone issues
     const date = new Date(dateString + 'T00:00:00');
@@ -133,6 +136,21 @@ Pending payment: ${unpaidNames}`;
     console.log('Opening WhatsApp with message:', message);
     window.open(whatsappUrl, '_blank');
   };
+
+  // Use native sharing for mobile when available
+  if (isNative && (type === 'broadcast' || type === 'bulk-interested' || type === 'bulk-unpaid')) {
+    return (
+      <MobileShare
+        trip={trip}
+        message={generateMessage()}
+        variant={variant}
+        size={size}
+        className={className}
+      >
+        {children}
+      </MobileShare>
+    );
+  }
 
   return (
     <Button
