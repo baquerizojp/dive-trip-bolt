@@ -1,0 +1,22 @@
+{
+  "appId": "com.divetripbuddy.app",
+  "appName": "Dive Trip Buddy",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "StatusBar": {
+      "style": "LIGHT_CONTENT",
+      "backgroundColor": "#2563eb"
+    },
+    "Keyboard": {
+      "resize": "body",
+      "style": "dark",
+      "resizeOnFullScreen": true
+    },
+    "App": {
+      "launchUrl": ""
+    }
+  }
+}
